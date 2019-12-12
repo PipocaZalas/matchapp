@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -28,6 +28,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vue-drag-drop.client.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,7 +41,23 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-purgecss',
+    'nuxt-webfontloader'
   ],
+   /*
+  ** purgeCSS options
+  */
+  purgeCSS: {
+    whitelistPatterns: [/(^|\.)fa-/, /-fa($|\.)/]
+  },
+  /*
+  ** webfontloader options
+  */
+  webfontloader: {
+    google: {
+      families: ['Nunito:400,600,800&display=swap']
+    }
+  },
   /*
   ** Build configuration
   */
