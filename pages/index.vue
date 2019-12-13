@@ -8,15 +8,20 @@
         El alumno debe relacionar cada animal con su hábitat, puedes arrastrar haciendo click sin soltar.
       </p>
 
-      <div class="mt-10">
+      <p
+        v-if="lvl !== 3"
+        class="font-bold text-center text-2xl text-cyan-500 my-6">Nivel {{ lvl }}</p>
+
+      <div class="mt-6">
         <First ref="lvl" v-if="lvl === 1" />
         <Second ref="lvl" v-if="lvl === 2" />
+        <Congratulations ref="lvl" v-if="lvl === 3" />
 
         <button
           class="block w-64 tracking-wider mx-auto mt-10 rounded bg-blue-400 px-4 py-3 text-white font-bold shadow-lg focus:outline-none hover:bg-blue-500"
           @click="match"
         >
-          CONFIRMAR
+          {{ lvl === 3 ? 'VOLVER A JUGAR' : 'CONFIRMAR' }}
         </button>
       </div>
     </div>
@@ -26,11 +31,13 @@
 <script>
 import First from '@/components/First'
 import Second from '@/components/Second'
+import Congratulations from '@/components/Congratulations'
 
 export default {
   components: {
     First,
-    Second
+    Second,
+    Congratulations
   },
 
   data() {
@@ -41,10 +48,14 @@ export default {
 
   methods: {
     match() {
-      if (this.$refs.lvl.isValid()) {
-        alert('¡Ganaste!')
+      if (this.lvl === 3) {
+        this.lvl = 1
       } else {
-        alert(':( Necesitas mover a la oveja')
+        if (this.$refs.lvl.isValid()) {
+          this.lvl++
+        } else {
+          alert('Ops! Respuesta incorrecta')
+        }
       }
     }
   }
