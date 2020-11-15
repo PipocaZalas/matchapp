@@ -1,6 +1,6 @@
 # match
 
-> My primo Nuxt.js project
+> Just a simple game to match animals with their ecosystems
 
 ## Build Setup
 
